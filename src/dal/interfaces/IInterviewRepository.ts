@@ -5,4 +5,5 @@ export interface IInterviewRepository {
     saveMany(interviews: Interview[]): Promise<Interview[]>;
     findById(id: string): Promise<Interview | null>;
     findAll(): Promise<Interview[]>;
+    delete(id: string): Promise<void>;
 }

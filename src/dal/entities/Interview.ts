@@ -14,14 +14,24 @@ export class Interview {
     @Column()
     type: string;
 
+    @Column({ nullable: true })
+    candidateId: string;
+
+    @Column({ nullable: true })
+    recruiterId: string;
+
+    @Column({ nullable: true })
+    resultId: string;
+
     @ManyToOne(() => Candidate, candidate => candidate.interviews)
+    @JoinColumn({ name: 'candidateId' })
     candidate: Candidate;
 
     @ManyToOne(() => Recruiter, recruiter => recruiter.interviews)
+    @JoinColumn({ name: 'recruiterId' })
     recruiter: Recruiter;
 
-    @OneToOne(() => InterviewResult, result => result.interview, { cascade: true })
-    
-    @JoinColumn()
+    @OneToOne(() => InterviewResult, { nullable: true, cascade: true, onDelete: 'SET NULL' })
+    @JoinColumn({ name: 'resultId' })
     result: InterviewResult;
 }

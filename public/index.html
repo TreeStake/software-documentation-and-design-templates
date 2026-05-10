@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cornerstone Recruiting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f0f2f5; }
+        .navbar-brand { font-weight: 700; letter-spacing: 0.5px; }
+        .form-container { background: white; padding: 24px; border-radius: 10px; margin-bottom: 28px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+        .card { border: none; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); height: 100%; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); }
+        .card-body { display: flex; flex-direction: column; gap: 6px; }
+        .card-title { font-weight: 600; font-size: 1rem; margin-bottom: 2px; }
+        .badge-active { background: #d1fae5; color: #065f46; }
+        .badge-inactive { background: #fee2e2; color: #991b1b; }
+        .stat-item { font-size: 0.82rem; color: #555; }
+        .stat-item span { font-weight: 600; color: #111; }
+        .btn-edit { color: #0d6efd; border-color: #0d6efd; }
+        .btn-edit:hover { background-color: #0d6efd; color: white; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary mb-4">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">🏢 Cornerstone Recruiting</span>
+        </div>
+    </nav>
+
+    <div class="container pb-5">
+        <ul class="nav nav-tabs mb-4" id="mainTab" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-vacancies">📋 Вакансії</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-candidates">👤 Кандидати</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-recruiters">🎯 Рекрутери</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-interviews">📅 Інтерв'ю</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-results">✅ Результати</button></li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- VACANCIES -->
+            <div class="tab-pane fade show active" id="tab-vacancies">
+                <div class="form-container">
+                    <h5>➕ Додати вакансію</h5>
+                    <form id="vacancy-form" class="row g-3">
+                        <div class="col-md-6"><input type="text" class="form-control" name="title" placeholder="Назва посади" required></div>
+                        <div class="col-md-6"><input type="text" class="form-control" name="requiredSkills" placeholder="Вимоги" required></div>
+                        <div class="col-md-9"><input type="text" class="form-control" name="description" placeholder="Опис ролі" required></div>
+                        <div class="col-md-3 d-flex align-items-center"><div class="form-check"><input class="form-check-input" type="checkbox" name="isActive" id="v-isActive" checked><label class="form-check-label" for="v-isActive">Активна</label></div></div>
+                        <div class="col-12"><button type="submit" class="btn btn-primary">Додати</button></div>
+                    </form>
+                </div>
+                <div id="vacancies-list" class="row g-3"></div>
+            </div>
+
+            <!-- CANDIDATES -->
+            <div class="tab-pane fade" id="tab-candidates">
+                <div class="form-container">
+                    <h5>➕ Додати кандидата</h5>
+                    <form id="candidate-form" class="row g-3">
+                        <div class="col-md-6"><input type="text" class="form-control" name="name" placeholder="ПІБ" required></div>
+                        <div class="col-md-6"><input type="email" class="form-control" name="email" placeholder="Email" required></div>
+                        <div class="col-md-6"><input type="text" class="form-control" name="skills" placeholder="Навички" required></div>
+                        <div class="col-md-3">
+                            <select class="form-select" name="status">
+                                <option value="Новий">Новий</option><option value="На розгляді">На розгляді</option><option value="Співбесіда">Співбесіда</option><option value="Оффер">Оффер</option><option value="Відмова">Відмова</option><option value="Прийнятий">Прийнятий</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3"><input type="url" class="form-control" name="resumeUrl" placeholder="URL резюме"></div>
+                        <div class="col-12"><button type="submit" class="btn btn-primary">Додати</button></div>
+                    </form>
+                </div>
+                <div id="candidates-list" class="row g-3"></div>
+            </div>
+
+            <!-- RECRUITERS -->
+            <div class="tab-pane fade" id="tab-recruiters">
+                <div class="form-container">
+                    <h5>➕ Додати рекрутера</h5>
+                    <form id="recruiter-form" class="row g-3">
+                        <div class="col-md-4"><input type="text" class="form-control" name="name" placeholder="ПІБ" required></div>
+                        <div class="col-md-4"><input type="email" class="form-control" name="email" placeholder="Email" required></div>
+                        <div class="col-md-4"><input type="text" class="form-control" name="department" placeholder="Департамент" required></div>
+                        <div class="col-12"><button type="submit" class="btn btn-primary">Додати</button></div>
+                    </form>
+                </div>
+                <div id="recruiters-list" class="row g-3"></div>
+            </div>
+
+            <!-- INTERVIEWS -->
+            <div class="tab-pane fade" id="tab-interviews">
+                <div class="form-container">
+                    <h5>➕ Додати інтерв'ю</h5>
+                    <form id="interview-form" class="row g-3">
+                        <div class="col-md-4"><select class="form-select" name="candidateId" id="i-candidate" required><option value="">Кандидат...</option></select></div>
+                        <div class="col-md-4"><select class="form-select" name="recruiterId" id="i-recruiter" required><option value="">Рекрутер...</option></select></div>
+                        <div class="col-md-4">
+                            <select class="form-select" name="type" required>
+                                <option value="HR">HR</option><option value="Технічне">Технічне</option><option value="Фінальне">Фінальне</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6"><input type="datetime-local" class="form-control" name="scheduledDate" required></div>
+                        <div class="col-12"><button type="submit" class="btn btn-primary">Додати</button></div>
+                    </form>
+                </div>
+                <div id="interviews-list" class="row g-3"></div>
+            </div>
+
+            <!-- RESULTS -->
+            <div class="tab-pane fade" id="tab-results">
+                <div class="form-container">
+                    <h5>➕ Додати результат</h5>
+                    <form id="result-form" class="row g-3">
+                        <div class="col-md-5"><select class="form-select" name="interviewId" id="r-interview" required><option value="">Інтерв'ю...</option></select></div>
+                        <div class="col-md-2"><input type="number" class="form-control" name="score" min="1" max="10" placeholder="Оцінка" required></div>
+                        <div class="col-md-3"><select class="form-select" name="isPassed"><option value="true">Пройшов</option><option value="false">Не пройшов</option></select></div>
+                        <div class="col-md-12"><textarea class="form-control" name="feedback" rows="2" placeholder="Відгук..."></textarea></div>
+                        <div class="col-12"><button type="submit" class="btn btn-primary">Зберегти</button></div>
+                    </form>
+                </div>
+                <div id="results-list" class="row g-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h5 class="modal-title">Редагування</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body"><form id="edit-form" class="row g-3"></form></div>
+                <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button><button type="button" class="btn btn-primary" onclick="submitEdit()">Зберегти зміни</button></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
