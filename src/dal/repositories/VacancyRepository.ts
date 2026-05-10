@@ -1,32 +1,33 @@
 import { injectable } from 'tsyringe';
-import { DataSource } from 'typeorm';
 import { appDataSource } from '../data-source';
-
 import { Vacancy } from '../entities/Vacancy';
 import { IVacancyRepository } from '../interfaces/IVacancyRepository';
 
 @injectable()
 export class VacancyRepository implements IVacancyRepository {
-    private readonly ds: DataSource;
-
-    constructor() {
-        this.ds = appDataSource;
-    }
-
     async save(vacancy: Vacancy): Promise<Vacancy> {
-        return this.ds.getRepository(Vacancy).save(vacancy);
+        return appDataSource.getRepository(Vacancy).save(vacancy);
     }
 
     async saveMany(vacancies: Vacancy[]): Promise<Vacancy[]> {
         if (vacancies.length === 0) return [];
-        return this.ds.getRepository(Vacancy).save(vacancies);
+        return appDataSource.getRepository(Vacancy).save(vacancies);
     }
 
     async findById(id: string): Promise<Vacancy | null> {
-        return this.ds.getRepository(Vacancy).findOneBy({ id });
+        return appDataSource.getRepository(Vacancy).findOneBy({ id });
     }
 
     async findAll(): Promise<Vacancy[]> {
-        return this.ds.getRepository(Vacancy).find();
+        return appDataSource.getRepository(Vacancy).find();
+    }
+
+    async delete(id: string): Promise<void> {
+        await appDataSource.query(
+            'UPDATE candidates SET vacancyId = NULL WHERE vacancyId = ?', [id]
+        );
+        await appDataSource.query(
+            'DELETE FROM vacancies WHERE id = ?', [id]
+        );
     }
 }

@@ -5,4 +5,5 @@ export interface IVacancyRepository {
     saveMany(vacancies: Vacancy[]): Promise<Vacancy[]>;
     findById(id: string): Promise<Vacancy | null>;
     findAll(): Promise<Vacancy[]>;
+    delete(id: string): Promise<void>;
 }

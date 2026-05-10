@@ -15,6 +15,15 @@ import { ICandidateRepository } from './dal/interfaces/ICandidateRepository';
 import { IRecruiterRepository } from './dal/interfaces/IRecruiterRepository';
 import { IVacancyRepository } from './dal/interfaces/IVacancyRepository';
 import { IInterviewRepository } from './dal/interfaces/IInterviewRepository';
+import { VacancyController } from './presentation/controllers/VacancyController';
+import { CandidateController } from './presentation/controllers/CandidateController';
+import { RecruiterController } from './presentation/controllers/RecruiterController';
+import { InterviewController } from './presentation/controllers/InterviewController';
+import { InterviewResultRepository } from './dal/repositories/InterviewResultRepository';
+import { IInterviewResultRepository } from './dal/interfaces/IInterviewResultRepository';
+import { InterviewResultController } from './presentation/controllers/InterviewResultController';
+
+
 
 
 container.register<ICsvReader>(TOKENS.ICsvReader, { useClass: CsvReader });
@@ -24,5 +33,15 @@ container.register<IVacancyRepository>(TOKENS.IVacancyRepository, { useClass: Va
 container.register<IInterviewRepository>(TOKENS.IInterviewRepository, { useClass: InterviewRepository });
 
 container.register<IDataImportService>(TOKENS.IDataImportService, { useClass: DataImportService });
+
+container.register(TOKENS.VacancyController, { useClass: VacancyController });
+container.register(TOKENS.CandidateController, { useClass: CandidateController });
+container.register(TOKENS.RecruiterController, { useClass: RecruiterController });
+container.register(TOKENS.InterviewController, { useClass: InterviewController });
+
+container.register<IInterviewResultRepository>(TOKENS.IInterviewResultRepository, { useClass: InterviewResultRepository });
+container.register(TOKENS.InterviewResultController, { useClass: InterviewResultController });
+
+
 
 export { container };

@@ -5,4 +5,5 @@ export interface ICandidateRepository {
     saveMany(candidates: Candidate[]): Promise<Candidate[]>;
     findById(id: string): Promise<Candidate | null>;
     findAll(): Promise<Candidate[]>;
+    delete(id: string): Promise<void>;
 }

@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
-import { Interview } from './Interview';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('interview_results')
 export class InterviewResult {
@@ -14,7 +13,4 @@ export class InterviewResult {
 
     @Column()
     isPassed: boolean;
-
-    @OneToOne(() => Interview, interview => interview.result)
-    interview: Interview;
 }

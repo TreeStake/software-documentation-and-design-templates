@@ -5,4 +5,5 @@ export interface IRecruiterRepository {
     saveMany(recruiters: Recruiter[]): Promise<Recruiter[]>;
     findById(id: string): Promise<Recruiter | null>;
     findAll(): Promise<Recruiter[]>;
+    delete(id: string): Promise<void>;
 }
