@@ -1,1 +1,0 @@
-# software-documentation-and-design-templates

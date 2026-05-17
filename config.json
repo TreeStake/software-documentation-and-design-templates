@@ -1,0 +1,32 @@
+{
+  "csvFile": "Revenue_Budget_20260515.csv",
+  "limit": 50,
+  "offset": 0,
+  "output": {
+    "type": "kafka",
+
+    "console": {
+      "showRowNumbers": true,
+      "showHeader": true,
+      "separator": ""
+    },
+
+    "kafka": {
+      "brokers": ["localhost:9092"],
+      "topic": "revenue-budget",
+      "clientId": "revenue-budget-producer",
+      "batchSize": 100
+    },
+
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "password": "",
+      "db": 0,
+      "keyPrefix": "rev",
+      "ttl": 0,
+      "useList": false,
+      "listKey": "revenue_budget:records"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "revenue-budget",
+  "version": "1.0.0",
+  "description": "Revenue Budget CSV reader with Strategy pattern output (console / Kafka / Redis)",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "ts-node src/main.ts",
+    "clean": "rimraf dist"
+  },
+  "keywords": [
+    "strategy-pattern",
+    "csv",
+    "kafka",
+    "redis",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "rimraf": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.4.0"
+  },
+  "optionalDependencies": {
+    "ioredis": "^5.10.1",
+    "kafkajs": "^2.2.4"
+  }
+}
